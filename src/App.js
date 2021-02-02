@@ -52,7 +52,6 @@ class App extends Component {
       slGender: 0,
       rdLanguage: 'vi',
       cbAgree: false,
-      tasks: [],
       status: false,
       tasksUpdate: [],
       search: {
@@ -206,22 +205,15 @@ class App extends Component {
       });
     }
   }
-  s4() {
-    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-  }
-  generateID() {
-    return (this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" +
-      this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" +
-      this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4()
-    )
-  }
-  componentDidMount() {
-    if (localStorage && localStorage.getItem("tasks")) {
-      this.setState({
-        tasks: JSON.parse(localStorage.getItem("tasks"))
-      });
-    }
-  }
+  // s4() {
+  //   return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+  // }
+  // generateID() {
+  //   return (this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" +
+  //     this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" +
+  //     this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4()
+  //   )
+  // }
   onClick = (event) => {
     var tasks = [
       {
@@ -300,57 +292,57 @@ class App extends Component {
       tasksUpdate={this.state.tasksUpdate}
       receiveDataFromTaskFormNews={this.receiveDataFromTaskFormNews}
       receiveDataFromTaskForm={this.receiveDataFromTaskForm} />
-    var { tasks, search, txtKey, sort } = this.state;
+    var { search, txtKey, sort } = this.state;
     console.log(search);
-    if(sort.values === 'alpha') {
-      tasks.sort((a, b) => {
-        if(a.name > b.name) {
-          return sort.data;
-        }
-        else if(a.name < b.name) {
-          return -sort.data;
-        }
-        else {
-          return 0;
-        }
-      });
-    }
-    else {
-      tasks.sort((a, b) => {
-        if(a.status > b.status) {
-          return -sort.data;
-        }
-        else if(a.status < b.status) {
-          return sort.data;
-        }
-        else {
-          return 0;
-        }
-      });
-    }
+    // if(sort.values === 'alpha') {
+    //   tasks.sort((a, b) => {
+    //     if(a.name > b.name) {
+    //       return sort.data;
+    //     }
+    //     else if(a.name < b.name) {
+    //       return -sort.data;
+    //     }
+    //     else {
+    //       return 0;
+    //     }
+    //   });
+    // }
+    // else {
+    //   tasks.sort((a, b) => {
+    //     if(a.status > b.status) {
+    //       return -sort.data;
+    //     }
+    //     else if(a.status < b.status) {
+    //       return sort.data;
+    //     }
+    //     else {
+    //       return 0;
+    //     }
+    //   });
+    // }
     console.log(sort);
-    if (txtKey !== '') {
-      tasks = tasks.filter((values, index) => {
-        return values.name.toLowerCase().indexOf(txtKey) !== -1;
-      })
-    }
-    // lấy được task mới sau khi search
-    if (search.name !== '') {
-      tasks = tasks.filter((values, index) => {
-        // lọc chữ mới dùng indexOf, còn lọc true, false thì = true or false thôi
-        return values.name.toLowerCase().indexOf(search.name) !== -1;
-      });
-    }
-    // tiếp tục lấy task mới này lọc qua true or false
-    tasks = tasks.filter((values, index) => {
-      if (search.active === -1) {
-        return tasks;
-      }
-      else {
-        return values.status === (search.active === 0 ? false : true);
-      }
-    });
-    console.log(tasks);
+    // if (txtKey !== '') {
+    //   tasks = tasks.filter((values, index) => {
+    //     return values.name.toLowerCase().indexOf(txtKey) !== -1;
+    //   })
+    // }
+    // // lấy được task mới sau khi search
+    // if (search.name !== '') {
+    //   tasks = tasks.filter((values, index) => {
+    //     // lọc chữ mới dùng indexOf, còn lọc true, false thì = true or false thôi
+    //     return values.name.toLowerCase().indexOf(search.name) !== -1;
+    //   });
+    // }
+    // // tiếp tục lấy task mới này lọc qua true or false
+    // tasks = tasks.filter((values, index) => {
+    //   if (search.active === -1) {
+    //     return tasks;
+    //   }
+    //   else {
+    //     return values.status === (search.active === 0 ? false : true);
+    //   }
+    // });
+    // console.log(tasks);
     var elementsProduct = this.state.products.map((values, index) => {
       var result = '';
       result = <ProductTable
@@ -408,7 +400,7 @@ class App extends Component {
                   receiveDataFromTaskItemSeachActive={this.receiveDataFromTaskItemSeachActive}
                   receiveDataFromTaskItemUpdate={this.receiveDataFromTaskItemUpdate}
                   receiveDataFromTaskItemDelete={this.receiveDataFromTaskItemDelete}
-                  tasks={tasks} receiveDataFromTaskItem={this.receiveDataFromTaskItem} />
+                  receiveDataFromTaskItem={this.receiveDataFromTaskItem} />
               </div>
             </div>
           </div>

@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import TaskItem from './TaskItem';
-
+import { connect } from 'react-redux';
 class TaskList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            txtNameTaskList : '',
-            slActiveTaskList : -1
+            txtNameTaskList: '',
+            slActiveTaskList: -1
         }
     }
     onChange = (event) => {
-        var {target} = event;
+        var { target } = event;
         var name = target.name;
         var value = target.value;
         this.setState({
-            [name] : value
+            [name]: value
         });
         this.props.receiveDataFromTaskItemSeachActive(
             name === 'txtNameTaskList' ? value : this.state.txtNameTaskList,
@@ -22,6 +22,7 @@ class TaskList extends Component {
         )
     }
     render() {
+        // lúc này this.props.tasks là lấy từ store
         var { tasks } = this.props;
         console.log(this.props.tasks);
         var showTaskItem = tasks.map((values, index) => {
@@ -82,4 +83,14 @@ class TaskList extends Component {
 }
 
 
-export default TaskList;
+const mapStateToProps = state => {
+    return {
+        // state.tasks -> tasks là tên dùng khai báo bên reducers -> index.js
+        // tasks : -> giống như thằng cha gửi data qua thằng con tasks={this.state.tasks}
+        // tasks này là tasks 1
+        tasks: state.tasks
+    }
+}
+
+
+export default connect(mapStateToProps, null)(TaskList);
