@@ -3,7 +3,9 @@
 // và các reducers khác nằm trong object
 import {combineReducers} from 'redux';
 import tasks from './tasks';
+import status from './status';
 const myReducers = combineReducers({
-    tasks : tasks
+    tasks : tasks,
+    status : status
 });
 export default myReducers;

@@ -16,16 +16,20 @@ var myReducers = (state = initialState, action) => {
         }
         case types.ADD_TASK: {
             // cách 1
-            // var newTasks = {
-            //     id : generateID(),
-            //     name : action.tasks.name,
-            //     status : action.tasks.status 
+            // if(action.tasks.name !== '') {
+            //     var newTasks = {
+            //         id : generateID(),
+            //         name : action.tasks.name,
+            //         status : action.tasks.status 
+            //     }
+            //     state.push(newTasks);
             // }
-            // state.push(newTasks);
             // cách 2
+            //console.log(action.tasks);
             action.tasks.id = generateID();
             state.push(action.tasks);
             localStorage.setItem('tasks', JSON.stringify(state));
+            // cập nhật lại state, nó giống với setState({})
             return [...state];
         }
         default: return state;

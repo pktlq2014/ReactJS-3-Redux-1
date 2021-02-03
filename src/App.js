@@ -9,6 +9,8 @@ import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
 import Control from './components/Control';
 import SizeSetting from './components/SizeSetting';
+import { connect } from 'react-redux';
+import * as actions from './actions/index';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -52,7 +54,6 @@ class App extends Component {
       slGender: 0,
       rdLanguage: 'vi',
       cbAgree: false,
-      status: false,
       tasksUpdate: [],
       search: {
         name: '',
@@ -146,43 +147,43 @@ class App extends Component {
     });
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }
-  receiveDataFromTaskFormNews = (data, status, name) => {
-    console.log(data);
-    var { tasks } = this.state;
-    // có id là edit, không có id là add
-    if (data.id === "") {
-      if (name !== "") {
-        data.id = this.generateID();
-        tasks.push(data);
-        this.setState({
-          tasks: tasks
-        });
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-      }
-      if (status === 0) {
-        this.setState({
-          status: false
-        });
-      }
-    }
-    else {
-      tasks.forEach((values, index) => {
-        if (values.id === data.id) {
-          values.name = data.name;
-          values.status = data.status;
-          this.setState({
-            tasks: tasks
-          });
-          localStorage.setItem("tasks", JSON.stringify(tasks));
-        }
-        if (status === 0) {
-          this.setState({
-            status: false
-          });
-        }
-      });
-    }
-  }
+  // receiveDataFromTaskFormNews = (data, status, name) => {
+  //   console.log(data);
+  //   var { tasks } = this.state;
+  //   // có id là edit, không có id là add
+  //   if (data.id === "") {
+  //     if (name !== "") {
+  //       data.id = this.generateID();
+  //       tasks.push(data);
+  //       this.setState({
+  //         tasks: tasks
+  //       });
+  //       localStorage.setItem("tasks", JSON.stringify(tasks));
+  //     }
+  //     if (status === 0) {
+  //       this.setState({
+  //         status: false
+  //       });
+  //     }
+  //   }
+  //   else {
+  //     tasks.forEach((values, index) => {
+  //       if (values.id === data.id) {
+  //         values.name = data.name;
+  //         values.status = data.status;
+  //         this.setState({
+  //           tasks: tasks
+  //         });
+  //         localStorage.setItem("tasks", JSON.stringify(tasks));
+  //       }
+  //       if (status === 0) {
+  //         this.setState({
+  //           status: false
+  //         });
+  //       }
+  //     });
+  //   }
+  // }
   receiveDataFromTaskForm = (data) => {
     if (data === 0) {
       this.setState({
@@ -191,19 +192,20 @@ class App extends Component {
     }
   }
   showTaskForm = () => {
-    var { status } = this.state;
-    if (status === true) {
-      this.setState({
-        status: false,
-        tasksUpdate: null
-      });
-    }
-    else {
-      this.setState({
-        status: true,
-        tasksUpdate: null
-      });
-    }
+    // var { status } = this.props;
+    // if (status === true) {
+    //   this.setState({
+    //     status: false,
+    //     tasksUpdate: null
+    //   });
+    // }
+    // else {
+    //   this.setState({
+    //     status: true,
+    //     tasksUpdate: null
+    //   });
+    // }
+    this.props.showTaskForm();
   }
   // s4() {
   //   return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -288,10 +290,15 @@ class App extends Component {
     console.log(this.refs.name.value);
   }
   render() {
-    var status = this.state.status === false ? '' : <TaskForm
+    var propsStatus = this.props.status;
+    console.log(propsStatus);
+    var status = propsStatus === false ? '' : <TaskForm
       tasksUpdate={this.state.tasksUpdate}
-      receiveDataFromTaskFormNews={this.receiveDataFromTaskFormNews}
-      receiveDataFromTaskForm={this.receiveDataFromTaskForm} />
+      receiveDataFromTaskForm={this.receiveDataFromTaskForm}
+    />;
+    // var status = this.state.status === false ? '' : <TaskForm
+    //   tasksUpdate={this.state.tasksUpdate}
+    //   receiveDataFromTaskForm={this.receiveDataFromTaskForm} />
     var { search, txtKey, sort } = this.state;
     console.log(search);
     // if(sort.values === 'alpha') {
@@ -372,13 +379,13 @@ class App extends Component {
             <hr />
           </div>
           <div className="row">
-            <div className={this.state.status === true ? 'col-xs-4 col-sm-4 col-md-4 col-lg-4' : 'col-xs-0 col-sm-0 col-md-0 col-lg-0'}>
+            <div className={propsStatus === true ? 'col-xs-4 col-sm-4 col-md-4 col-lg-4' : 'col-xs-0 col-sm-0 col-md-0 col-lg-0'}>
               {status}
             </div>
 
 
 
-            <div className={this.state.status === true ? 'col-xs-8 col-sm-8 col-md-8 col-lg-8' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}>
+            <div className={propsStatus === true ? 'col-xs-8 col-sm-8 col-md-8 col-lg-8' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}>
               <button type="button" className="btn btn-primary" onClick={this.showTaskForm}>
                 <i className="fa fa-plus mr-5"></i>Thêm Công Việc
               </button>
@@ -517,7 +524,6 @@ class App extends Component {
 
 
 
-
         <div className="container mt-50">
           <div className="row">
             {/* nhận data từ thằng con gửi lên */}
@@ -586,4 +592,16 @@ class App extends Component {
     );
   }
 }
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    status: state.status
+  };
+}
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    showTaskForm : () => {
+      dispatch(actions.toggleForm())
+    }
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);

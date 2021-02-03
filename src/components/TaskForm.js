@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import * as actions from "./../actions/index";
 class TaskForm extends Component {
 	constructor(props) {
@@ -11,24 +11,25 @@ class TaskForm extends Component {
 		}
 	}
 	componentDidMount() {
-		var update = this.props.tasksUpdate;
-		if (update) {
-			this.setState({
-				name: update.name,
-				status: update.status,
-				id: update.id
-			});
-			console.log(update.name);
-			console.log(this.state);
-		}
+		// var update = this.props.tasksUpdate;
+		// if (update) {
+		// 	this.setState({
+		// 		name: update.name,
+		// 		status: update.status,
+		// 		id: update.id
+		// 	});
+		// 	console.log(update.name);
+		// 	console.log(this.state);
+		// }
 	}
 	onSubmit = (event) => {
 		event.preventDefault();
-		var sl = this.state.status;
-		this.props.onAddTask(this.state);
+		console.log("aaa: " + this.state.id);
 		console.log(this.state.name);
-		console.log(typeof sl);
-		//this.props.receiveDataFromTaskFormNews(this.state, 0, this.state.name);
+		if (this.state.name !== '') {
+			this.props.onAddTask(this.state);
+		}
+		this.props.onCloseTask();
 	}
 	onChange = (event) => {
 		var { target } = event;
@@ -41,8 +42,8 @@ class TaskForm extends Component {
 			[name]: value
 		});
 	}
-	onClick = (event) => {
-		this.props.receiveDataFromTaskForm(0);
+	onCloseTask = (event) => {
+		this.props.onCloseTask();
 	}
 	render() {
 		return (
@@ -51,7 +52,7 @@ class TaskForm extends Component {
 					<h3 className="panel-title">
 						{this.state.id !== '' ? 'Cập Nhật Công Việc' : 'Thêm Công Việc'}
 					</h3>
-					<i className="fas fa-window-close" onClick={this.onClick}></i>
+					<i className="fas fa-window-close" onClick={this.onCloseTask}></i>
 				</div>
 
 
@@ -77,7 +78,7 @@ class TaskForm extends Component {
 						<br />
 						<div className="text-center">
 							<button type="submit" className="btn btn-warning">Thêm</button>&nbsp;
-                        	<button type="submit" className="btn btn-danger" onClick={this.onClick}>Hủy Bỏ</button>
+                        	<button type="submit" className="btn btn-danger" onClick={this.onCloseTask}>Hủy Bỏ</button>
 						</div>
 					</form>
 				</div>
@@ -87,13 +88,16 @@ class TaskForm extends Component {
 }
 const mapStateToProps = state => {
 	return {
-
+		tasks: state.tasks
 	};
-} 
+}
 const mapDispatchToProps = (dispatch, props) => {
 	return {
 		onAddTask: (tasks) => {
 			dispatch(actions.addTask(tasks));
+		},
+		onCloseTask: () => {
+			dispatch(actions.closeForm());
 		}
 	}
 }
