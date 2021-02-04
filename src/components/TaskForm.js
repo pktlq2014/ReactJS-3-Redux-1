@@ -11,17 +11,47 @@ class TaskForm extends Component {
 		}
 	}
 	componentDidMount() {
-		// var update = this.props.tasksUpdate;
-		// if (update) {
-		// 	this.setState({
-		// 		name: update.name,
-		// 		status: update.status,
-		// 		id: update.id
-		// 	});
-		// 	console.log(update.name);
-		// 	console.log(this.state);
-		// }
+		//var update = JSON.parse(localStorage.getItem("tasksUpdate"));
+		//console.log(update.id);
+		//var update = this.props.tasksUpdate;
+		var update = this.props.updateTasks;
+		console.log(update);
+		if (Object.keys(update).length === 0) {
+			this.setState({
+				id: '',
+				name: '',
+				status: false
+			});
+		}
+		else {
+			this.setState({
+				name: update.tasks.name,
+				status: update.tasks.status,
+				id: update.tasks.id
+			});
+		}
 	}
+	// componentWillReceiveProps(nextProps) {
+	// 	var update = JSON.parse(localStorage.getItem("tasksUpdate"));
+	// 	console.log(update);
+	// 	//var update = this.props.tasksUpdate;
+	// 	if (nextProps && nextProps.update) {
+	// 		this.setState({
+	// 			name: update.name,
+	// 			status: update.status,
+	// 			id: update.id
+	// 		});
+	// 		console.log(update.name);
+	// 		console.log(this.state);
+	// 	}
+	// 	else {
+	// 		this.setState({
+	// 			name : '',
+	// 			status : false,
+	// 			id : ''
+	// 		});
+	// 	}
+	// }
 	onSubmit = (event) => {
 		event.preventDefault();
 		console.log("aaa: " + this.state.id);
@@ -88,7 +118,8 @@ class TaskForm extends Component {
 }
 const mapStateToProps = state => {
 	return {
-		tasks: state.tasks
+		tasks: state.tasks,
+		updateTasks: state.updateTasks
 	};
 }
 const mapDispatchToProps = (dispatch, props) => {

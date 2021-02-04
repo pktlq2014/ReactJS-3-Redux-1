@@ -4,8 +4,10 @@
 import {combineReducers} from 'redux';
 import tasks from './tasks';
 import status from './status';
+import updateTasks from './updateTasks';
 const myReducers = combineReducers({
     tasks : tasks,
-    status : status
+    status : status,
+    updateTasks : updateTasks
 });
 export default myReducers;

@@ -91,28 +91,28 @@ class App extends Component {
       }
     });
   }
-  receiveDataFromTaskItemUpdate = (id) => {
-    if (this.state.status === false) {
-      this.setState({
-        status: true
-      });
-      var { tasks, tasksUpdate } = this.state;
-      tasks.forEach((values, index) => {
-        if (values.id === id) {
-          this.setState({
-            tasksUpdate: values
-          });
-        }
-      });
-      console.log(tasksUpdate);
-    }
-    else {
-      alert("Bạn Phải Tắt Chức Năng Trước Đó!!!");
-      this.setState({
-        status: false
-      });
-    }
-  }
+  // receiveDataFromTaskItemUpdate = (id) => {
+  //   if (this.state.status === false) {
+  //     this.setState({
+  //       status: true
+  //     });
+  //     var { tasks, tasksUpdate } = this.state;
+  //     tasks.forEach((values, index) => {
+  //       if (values.id === id) {
+  //         this.setState({
+  //           tasksUpdate: values
+  //         });
+  //       }
+  //     });
+  //     console.log(tasksUpdate);
+  //   }
+  //   else {
+  //     alert("Bạn Phải Tắt Chức Năng Trước Đó!!!");
+  //     this.setState({
+  //       status: false
+  //     });
+  //   }
+  // }
   receiveDataFromTaskItemDelete = (id) => {
     var { tasks } = this.state;
     tasks.splice(id, 1);
@@ -130,23 +130,23 @@ class App extends Component {
     });
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }
-  receiveDataFromTaskItem = (id) => {
-    var { tasks } = this.state;
-    tasks.forEach((values, index) => {
-      if (values.id === id) {
-        if (values.status === true) {
-          values.status = false;
-        }
-        else {
-          values.status = true;
-        }
-      }
-      this.setState({
-        tasks: tasks,
-      });
-    });
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }
+  // receiveDataFromTaskItem = (id) => {
+  //   var { tasks } = this.state;
+  //   tasks.forEach((values, index) => {
+  //     if (values.id === id) {
+  //       if (values.status === true) {
+  //         values.status = false;
+  //       }
+  //       else {
+  //         values.status = true;
+  //       }
+  //     }
+  //     this.setState({
+  //       tasks: tasks,
+  //     });
+  //   });
+  //   localStorage.setItem("tasks", JSON.stringify(tasks));
+  // }
   // receiveDataFromTaskFormNews = (data, status, name) => {
   //   console.log(data);
   //   var { tasks } = this.state;
@@ -206,6 +206,9 @@ class App extends Component {
     //   });
     // }
     this.props.showTaskForm();
+    this.props.defaultTasks();
+    // var storage = [];
+    // localStorage.setItem("tasksUpdate", JSON.stringify(storage));
   }
   // s4() {
   //   return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -216,29 +219,29 @@ class App extends Component {
   //     this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4()
   //   )
   // }
-  onClick = (event) => {
-    var tasks = [
-      {
-        id: this.generateID(),
-        name: "AAA",
-        status: true
-      },
-      {
-        id: this.generateID(),
-        name: "BBB",
-        status: false
-      },
-      {
-        id: this.generateID(),
-        name: "CCC",
-        status: true
-      },
-    ]
-    this.setState({
-      tasks: tasks
-    });
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }
+  // onClick = (event) => {
+  //   var tasks = [
+  //     {
+  //       id: this.generateID(),
+  //       name: "AAA",
+  //       status: true
+  //     },
+  //     {
+  //       id: this.generateID(),
+  //       name: "BBB",
+  //       status: false
+  //     },
+  //     {
+  //       id: this.generateID(),
+  //       name: "CCC",
+  //       status: true
+  //     },
+  //   ]
+  //   this.setState({
+  //     tasks: tasks
+  //   });
+  //   localStorage.setItem("tasks", JSON.stringify(tasks));
+  // }
   getValuesInput = (event) => {
     // this.setState({
     //   txtName : event.target.value
@@ -405,9 +408,8 @@ class App extends Component {
               <div className="row mt-15">
                 <TaskList
                   receiveDataFromTaskItemSeachActive={this.receiveDataFromTaskItemSeachActive}
-                  receiveDataFromTaskItemUpdate={this.receiveDataFromTaskItemUpdate}
                   receiveDataFromTaskItemDelete={this.receiveDataFromTaskItemDelete}
-                  receiveDataFromTaskItem={this.receiveDataFromTaskItem} />
+                 />
               </div>
             </div>
           </div>
@@ -594,13 +596,17 @@ class App extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    status: state.status
+    status: state.status,
+    updateTasks : state.updateTasks
   };
 }
 const mapDispatchToProps = (dispatch, props) => {
   return {
     showTaskForm : () => {
       dispatch(actions.toggleForm())
+    },
+    defaultTasks : () => {
+      dispatch(actions.defaultTasks());
     }
   };
 }

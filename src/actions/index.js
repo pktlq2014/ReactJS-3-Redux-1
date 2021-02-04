@@ -26,3 +26,26 @@ export const toggleForm = () => {
         type : types.TOGGLE_FORM
     }
 }
+export const statusForm = (id) => {
+    return {
+        type : types.STATUS_FORM,
+        id : id
+    }
+}
+export const updateTasks = (tasks) => {
+    return {
+        type : types.UPDATE_TASKS,
+        tasks : tasks
+    }
+}
+export const deleteTasks = (id) => {
+    return {
+        type : types.DELETE_TASKS,
+        id : id
+    }
+}
+export const defaultTasks = () => {
+    return {
+        type : types.DEFAULT_TASKS
+    }
+}

@@ -29,9 +29,7 @@ class TaskList extends Component {
             //index += 1;
             return <TaskItem
                 key={values.id}
-                receiveDataFromTaskItem={this.props.receiveDataFromTaskItem}
                 index={index}
-                receiveDataFromTaskItemUpdate={this.props.receiveDataFromTaskItemUpdate}
                 receiveDataFromTaskItemDelete={this.props.receiveDataFromTaskItemDelete}
                 id={values.id}
                 name={values.name}

@@ -32,6 +32,41 @@ var myReducers = (state = initialState, action) => {
             // cập nhật lại state, nó giống với setState({})
             return [...state];
         }
+        case types.STATUS_FORM: {
+            // console.log(action.id);
+            // console.log(state);
+            state.forEach((values, index) => {
+                if (values.id === action.id) {
+                    if (values.status === false) {
+                        values.status = true;
+                    }
+                    else {
+                        values.status = false;
+                    }
+                }
+            });
+            console.log(state);
+            localStorage.setItem('tasks', JSON.stringify(state));
+            return [...state];
+        }
+        // case types.UPDATE_TASKS: {
+        //     console.log(action.id);
+        //     var data = [];
+        //     state.forEach((values, index) => {
+        //         if (values.id === action.id) {
+        //             data.push(values);
+        //             localStorage.setItem("tasksUpdate", JSON.stringify(values));
+        //         }
+        //     });
+        //     //localStorage.setItem("tasksUpdate", JSON.stringify(data));
+        //     //console.log(data);
+        //     return [...state];
+        // }
+        case types.DELETE_TASKS: {
+            state.splice(action.id, 1);
+            localStorage.setItem('tasks', JSON.stringify(state));
+            return [...state];
+        }
         default: return state;
     }
 };
