@@ -4,10 +4,12 @@
 import {combineReducers} from 'redux';
 import tasks from './tasks';
 import status from './status';
+import search from './search';
 import updateTasks from './updateTasks';
 const myReducers = combineReducers({
     tasks : tasks,
     status : status,
-    updateTasks : updateTasks
+    updateTasks : updateTasks,
+    search : search
 });
 export default myReducers;

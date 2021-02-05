@@ -25,9 +25,19 @@ var myReducers = (state = initialState, action) => {
             //     state.push(newTasks);
             // }
             // cách 2
-            //console.log(action.tasks);
-            action.tasks.id = generateID();
-            state.push(action.tasks);
+            console.log(action);
+            if(action.tasks.id === "") {
+                action.tasks.id = generateID();
+                state.push(action.tasks);
+            }
+            else {
+                state.forEach((values, index) => {
+                    if(values.id === action.tasks.id) {
+                        values.name = action.tasks.name;
+                        values.status = action.tasks.status;
+                    }
+                });
+            }
             localStorage.setItem('tasks', JSON.stringify(state));
             // cập nhật lại state, nó giống với setState({})
             return [...state];
@@ -49,17 +59,16 @@ var myReducers = (state = initialState, action) => {
             localStorage.setItem('tasks', JSON.stringify(state));
             return [...state];
         }
-        // case types.UPDATE_TASKS: {
-        //     console.log(action.id);
-        //     var data = [];
+        // case types.UPDATE_TASKS_NEWS: {
+        //     //state = action;
+        //     console.log(action);
         //     state.forEach((values, index) => {
-        //         if (values.id === action.id) {
-        //             data.push(values);
-        //             localStorage.setItem("tasksUpdate", JSON.stringify(values));
+        //         if(values.id === action.id) {
+        //             values.id = action.id;
+        //             values.name = action.tasks.name;
+        //             values.status = action.tasks.status;
         //         }
         //     });
-        //     //localStorage.setItem("tasksUpdate", JSON.stringify(data));
-        //     //console.log(data);
         //     return [...state];
         // }
         case types.DELETE_TASKS: {
@@ -67,6 +76,25 @@ var myReducers = (state = initialState, action) => {
             localStorage.setItem('tasks', JSON.stringify(state));
             return [...state];
         }
+        // case types.SEARCH_TASKS: {
+        //     console.log(action.tasks);
+        //     var name = action.tasks.name.toLowerCase();
+        //     var status = parseInt(action.tasks.status);
+        //     if (name !== '') {
+        //         state = state.filter((values, index) => {
+        //             return values.name.toLowerCase().indexOf(name) !== -1;
+        //         });
+        //     }
+        //     state = state.filter((values, index) => {
+        //         if(status === -1) {
+        //             return state;
+        //         }
+        //         else {
+        //             return values.status === (status === 0 ? false : true);
+        //         }
+        //     }); 
+        //     //return [...state];
+        // }
         default: return state;
     }
 };

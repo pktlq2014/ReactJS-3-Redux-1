@@ -4,11 +4,12 @@ export const listAll = () => {
         type : types.LIST_ALL
     }
 }
-export const addTask = (tasks) => {
+export const addTask = (tasks, data) => {
     return {
         type: types.ADD_TASK,
         // mình cần thay đổi gì thì bỏ nó vào đây
-        tasks : tasks
+        tasks : tasks,
+        data : data
     }
 }
 export const closeForm = () => {
@@ -38,6 +39,12 @@ export const updateTasks = (tasks) => {
         tasks : tasks
     }
 }
+// export const updateTasksNew = (tasks, id) => {
+//     return {
+//         type : types.UPDATE_TASKS_NEWS,
+//         id : id
+//     }
+// }
 export const deleteTasks = (id) => {
     return {
         type : types.DELETE_TASKS,
@@ -47,5 +54,11 @@ export const deleteTasks = (id) => {
 export const defaultTasks = () => {
     return {
         type : types.DEFAULT_TASKS
+    }
+}
+export const searchTasks = (tasks) => {
+    return {
+        type : types.SEARCH_TASKS,
+        tasks : tasks
     }
 }

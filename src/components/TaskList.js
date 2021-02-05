@@ -1,36 +1,57 @@
 import React, { Component } from 'react';
 import TaskItem from './TaskItem';
 import { connect } from 'react-redux';
+import * as actions from './../actions/index';
 class TaskList extends Component {
     constructor(props) {
         super(props);
         this.state = {
             txtNameTaskList: '',
-            slActiveTaskList: -1
+            slActiveTaskList: "-1"
         }
     }
-    onChange = (event) => {
+    onSearchTasks = (event) => {
         var { target } = event;
         var name = target.name;
         var value = target.value;
         this.setState({
             [name]: value
         });
-        this.props.receiveDataFromTaskItemSeachActive(
-            name === 'txtNameTaskList' ? value : this.state.txtNameTaskList,
-            name === 'slActiveTaskList' ? value : this.state.slActiveTaskList
-        )
+        var tasks = {
+            name: name === 'txtNameTaskList' ? value : this.state.txtNameTaskList,
+            status: name === 'slActiveTaskList' ? value : this.state.slActiveTaskList
+        }
+        console.log(tasks);
+        this.props.onSearchTasks(tasks);
+        // this.props.receiveDataFromTaskItemSeachActive(
+        //     name === 'txtNameTaskList' ? value : this.state.txtNameTaskList,
+        //     name === 'slActiveTaskList' ? value : this.state.slActiveTaskList
+        // )
     }
     render() {
         // lúc này this.props.tasks là lấy từ store
-        var { tasks } = this.props;
-        console.log(this.props.tasks);
+        var { tasks, search } = this.props;
+        //console.log(tasks);
+        //console.log(search);
+        // var data = search.name.toLowerCase();
+        if (search.name) {
+            tasks = tasks.filter((values, index) => {
+                return values.name.toLowerCase().indexOf(search.name) !== -1;
+            });
+        }
+        tasks = tasks.filter((values, index) => {
+            if (search.status === -1) {
+                return tasks;
+            }
+            else {
+                return values.status === (search.status === 1 ? true : false);
+            }
+        });
         var showTaskItem = tasks.map((values, index) => {
             //index += 1;
             return <TaskItem
                 key={values.id}
                 index={index}
-                receiveDataFromTaskItemDelete={this.props.receiveDataFromTaskItemDelete}
                 id={values.id}
                 name={values.name}
                 status={values.status}
@@ -54,14 +75,14 @@ class TaskList extends Component {
                                 <input
                                     name="txtNameTaskList"
                                     value={this.props.txtNameTaskList}
-                                    onChange={this.onChange}
+                                    onChange={this.onSearchTasks}
                                     type="text" className="form-control" />
                             </td>
                             <td>
                                 <select className="form-control"
                                     name="slActiveTaskList"
                                     value={this.props.slActiveTaskList}
-                                    onChange={this.onChange}>
+                                    onChange={this.onSearchTasks}>
                                     <option value="-1">Tất Cả</option>
                                     <option value="0">Ẩn</option>
                                     <option value="1">Kích Hoạt</option>
@@ -86,9 +107,16 @@ const mapStateToProps = state => {
         // state.tasks -> tasks là tên dùng khai báo bên reducers -> index.js
         // tasks : -> giống như thằng cha gửi data qua thằng con tasks={this.state.tasks}
         // tasks này là tasks 1
-        tasks: state.tasks
+        tasks: state.tasks,
+        search: state.search
+    }
+}
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onSearchTasks: (tasks) => {
+            dispatch(actions.searchTasks(tasks));
+        }
     }
 }
 
-
-export default connect(mapStateToProps, null)(TaskList);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

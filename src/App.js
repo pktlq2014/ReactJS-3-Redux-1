@@ -80,17 +80,17 @@ class App extends Component {
       txtKey: values.toLowerCase()
     });
   }
-  receiveDataFromTaskItemSeachActive = (name, active) => {
-    console.log(name, active);
-    var active1 = parseInt(active);
-    console.log(typeof active1);
-    this.setState({
-      search: {
-        name: name.toLowerCase(),
-        active: active1
-      }
-    });
-  }
+  // receiveDataFromTaskItemSeachActive = (name, active) => {
+  //   console.log(name, active);
+  //   var active1 = parseInt(active);
+  //   console.log(typeof active1);
+  //   this.setState({
+  //     search: {
+  //       name: name.toLowerCase(),
+  //       active: active1
+  //     }
+  //   });
+  // }
   // receiveDataFromTaskItemUpdate = (id) => {
   //   if (this.state.status === false) {
   //     this.setState({
@@ -113,23 +113,23 @@ class App extends Component {
   //     });
   //   }
   // }
-  receiveDataFromTaskItemDelete = (id) => {
-    var { tasks } = this.state;
-    tasks.splice(id, 1);
-    this.setState({
-      tasks: tasks
-    });
+  // receiveDataFromTaskItemDelete = (id) => {
+  //   var { tasks } = this.state;
+  //   tasks.splice(id, 1);
+  //   this.setState({
+  //     tasks: tasks
+  //   });
 
 
 
-    // var result = tasks.filter((values, index) => {
-    //   return values.id !== id;
-    // })
-    this.setState({
-      tasks: tasks
-    });
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }
+  //   // var result = tasks.filter((values, index) => {
+  //   //   return values.id !== id;
+  //   // })
+  //   this.setState({
+  //     tasks: tasks
+  //   });
+  //   localStorage.setItem("tasks", JSON.stringify(tasks));
+  // }
   // receiveDataFromTaskItem = (id) => {
   //   var { tasks } = this.state;
   //   tasks.forEach((values, index) => {
@@ -184,13 +184,13 @@ class App extends Component {
   //     });
   //   }
   // }
-  receiveDataFromTaskForm = (data) => {
-    if (data === 0) {
-      this.setState({
-        status: false
-      });
-    }
-  }
+  // receiveDataFromTaskForm = (data) => {
+  //   if (data === 0) {
+  //     this.setState({
+  //       status: false
+  //     });
+  //   }
+  // }
   showTaskForm = () => {
     // var { status } = this.props;
     // if (status === true) {
@@ -296,7 +296,6 @@ class App extends Component {
     var propsStatus = this.props.status;
     console.log(propsStatus);
     var status = propsStatus === false ? '' : <TaskForm
-      tasksUpdate={this.state.tasksUpdate}
       receiveDataFromTaskForm={this.receiveDataFromTaskForm}
     />;
     // var status = this.state.status === false ? '' : <TaskForm
@@ -407,8 +406,7 @@ class App extends Component {
 
               <div className="row mt-15">
                 <TaskList
-                  receiveDataFromTaskItemSeachActive={this.receiveDataFromTaskItemSeachActive}
-                  receiveDataFromTaskItemDelete={this.receiveDataFromTaskItemDelete}
+               
                  />
               </div>
             </div>

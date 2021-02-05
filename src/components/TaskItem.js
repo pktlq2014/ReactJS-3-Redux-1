@@ -59,6 +59,8 @@ class TaskItem extends Component {
       //   id : this.props.id
       // });
       this.props.onUpdateTask(data);
+      localStorage.setItem("updateTasksNew", JSON.stringify(data));
+      // this.props.onUpdateTaskNews(data, this.props.id);
     }
     else {
       alert("Bạn Phải Tắt Chức Năng Trước Đó!!!");
@@ -110,6 +112,9 @@ const mapDispatchToProps = (dispatch, props) => {
     onUpdateTask : (tasks) => {
       dispatch(actions.updateTasks(tasks));
     },
+    // onUpdateTaskNews : (tasks, id) => {
+    //   dispatch(actions.updateTasks(tasks, id));
+    // },
     onDeleteTask : (id) => {
       dispatch(actions.deleteTasks(id));
     }

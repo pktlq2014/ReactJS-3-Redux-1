@@ -56,6 +56,8 @@ class TaskForm extends Component {
 		event.preventDefault();
 		console.log("aaa: " + this.state.id);
 		console.log(this.state.name);
+		//var data = JSON.parse(localStorage.getItem("updateTasksNew"));
+		//var data = this.props.updateTasks;
 		if (this.state.name !== '') {
 			this.props.onAddTask(this.state);
 		}
@@ -124,8 +126,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = (dispatch, props) => {
 	return {
-		onAddTask: (tasks) => {
-			dispatch(actions.addTask(tasks));
+		onAddTask: (tasks, data) => {
+			dispatch(actions.addTask(tasks, data));
 		},
 		onCloseTask: () => {
 			dispatch(actions.closeForm());
