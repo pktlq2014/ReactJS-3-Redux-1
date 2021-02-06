@@ -66,182 +66,10 @@ class App extends Component {
       }
     };
   }
-  // receiveDataFromSort = (values, data) => {
-  //   console.log(values, data);
-  //   this.setState({
-  //     sort: {
-  //       values: values,
-  //       data: data
-  //     }
-  //   });
-  // }
-  // receiveDataFromSearch = (values) => {
-  //   this.setState({
-  //     txtKey: values.toLowerCase()
-  //   });
-  // }
-  // receiveDataFromTaskItemSeachActive = (name, active) => {
-  //   console.log(name, active);
-  //   var active1 = parseInt(active);
-  //   console.log(typeof active1);
-  //   this.setState({
-  //     search: {
-  //       name: name.toLowerCase(),
-  //       active: active1
-  //     }
-  //   });
-  // }
-  // receiveDataFromTaskItemUpdate = (id) => {
-  //   if (this.state.status === false) {
-  //     this.setState({
-  //       status: true
-  //     });
-  //     var { tasks, tasksUpdate } = this.state;
-  //     tasks.forEach((values, index) => {
-  //       if (values.id === id) {
-  //         this.setState({
-  //           tasksUpdate: values
-  //         });
-  //       }
-  //     });
-  //     console.log(tasksUpdate);
-  //   }
-  //   else {
-  //     alert("Bạn Phải Tắt Chức Năng Trước Đó!!!");
-  //     this.setState({
-  //       status: false
-  //     });
-  //   }
-  // }
-  // receiveDataFromTaskItemDelete = (id) => {
-  //   var { tasks } = this.state;
-  //   tasks.splice(id, 1);
-  //   this.setState({
-  //     tasks: tasks
-  //   });
-
-
-
-  //   // var result = tasks.filter((values, index) => {
-  //   //   return values.id !== id;
-  //   // })
-  //   this.setState({
-  //     tasks: tasks
-  //   });
-  //   localStorage.setItem("tasks", JSON.stringify(tasks));
-  // }
-  // receiveDataFromTaskItem = (id) => {
-  //   var { tasks } = this.state;
-  //   tasks.forEach((values, index) => {
-  //     if (values.id === id) {
-  //       if (values.status === true) {
-  //         values.status = false;
-  //       }
-  //       else {
-  //         values.status = true;
-  //       }
-  //     }
-  //     this.setState({
-  //       tasks: tasks,
-  //     });
-  //   });
-  //   localStorage.setItem("tasks", JSON.stringify(tasks));
-  // }
-  // receiveDataFromTaskFormNews = (data, status, name) => {
-  //   console.log(data);
-  //   var { tasks } = this.state;
-  //   // có id là edit, không có id là add
-  //   if (data.id === "") {
-  //     if (name !== "") {
-  //       data.id = this.generateID();
-  //       tasks.push(data);
-  //       this.setState({
-  //         tasks: tasks
-  //       });
-  //       localStorage.setItem("tasks", JSON.stringify(tasks));
-  //     }
-  //     if (status === 0) {
-  //       this.setState({
-  //         status: false
-  //       });
-  //     }
-  //   }
-  //   else {
-  //     tasks.forEach((values, index) => {
-  //       if (values.id === data.id) {
-  //         values.name = data.name;
-  //         values.status = data.status;
-  //         this.setState({
-  //           tasks: tasks
-  //         });
-  //         localStorage.setItem("tasks", JSON.stringify(tasks));
-  //       }
-  //       if (status === 0) {
-  //         this.setState({
-  //           status: false
-  //         });
-  //       }
-  //     });
-  //   }
-  // }
-  // receiveDataFromTaskForm = (data) => {
-  //   if (data === 0) {
-  //     this.setState({
-  //       status: false
-  //     });
-  //   }
-  // }
   showTaskForm = () => {
-    // var { status } = this.props;
-    // if (status === true) {
-    //   this.setState({
-    //     status: false,
-    //     tasksUpdate: null
-    //   });
-    // }
-    // else {
-    //   this.setState({
-    //     status: true,
-    //     tasksUpdate: null
-    //   });
-    // }
     this.props.showTaskForm();
     this.props.defaultTasks();
-    // var storage = [];
-    // localStorage.setItem("tasksUpdate", JSON.stringify(storage));
   }
-  // s4() {
-  //   return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-  // }
-  // generateID() {
-  //   return (this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" +
-  //     this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" +
-  //     this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" + this.s4()
-  //   )
-  // }
-  // onClick = (event) => {
-  //   var tasks = [
-  //     {
-  //       id: this.generateID(),
-  //       name: "AAA",
-  //       status: true
-  //     },
-  //     {
-  //       id: this.generateID(),
-  //       name: "BBB",
-  //       status: false
-  //     },
-  //     {
-  //       id: this.generateID(),
-  //       name: "CCC",
-  //       status: true
-  //     },
-  //   ]
-  //   this.setState({
-  //     tasks: tasks
-  //   });
-  //   localStorage.setItem("tasks", JSON.stringify(tasks));
-  // }
   getValuesInput = (event) => {
     // this.setState({
     //   txtName : event.target.value
@@ -295,37 +123,10 @@ class App extends Component {
   render() {
     var propsStatus = this.props.status;
     console.log(propsStatus);
-    var status = propsStatus === false ? '' : <TaskForm
-      receiveDataFromTaskForm={this.receiveDataFromTaskForm}
-    />;
-    // var status = this.state.status === false ? '' : <TaskForm
-    //   tasksUpdate={this.state.tasksUpdate}
-    //   receiveDataFromTaskForm={this.receiveDataFromTaskForm} />
-    var { search, txtKey, sort } = this.state;
+    var status = propsStatus === false ? '' : <TaskForm />;
+    var { search, sort } = this.state;
     console.log(search);
     console.log(sort);
-    // if (txtKey !== '') {
-    //   tasks = tasks.filter((values, index) => {
-    //     return values.name.toLowerCase().indexOf(txtKey) !== -1;
-    //   })
-    // }
-    // // lấy được task mới sau khi search
-    // if (search.name !== '') {
-    //   tasks = tasks.filter((values, index) => {
-    //     // lọc chữ mới dùng indexOf, còn lọc true, false thì = true or false thôi
-    //     return values.name.toLowerCase().indexOf(search.name) !== -1;
-    //   });
-    // }
-    // // tiếp tục lấy task mới này lọc qua true or false
-    // tasks = tasks.filter((values, index) => {
-    //   if (search.active === -1) {
-    //     return tasks;
-    //   }
-    //   else {
-    //     return values.status === (search.active === 0 ? false : true);
-    //   }
-    // });
-    // console.log(tasks);
     var elementsProduct = this.state.products.map((values, index) => {
       var result = '';
       result = <ProductTable
@@ -371,12 +172,12 @@ class App extends Component {
 
 
 
-              <Control/>
+              <Control />
 
 
 
               <div className="row mt-15">
-                <TaskList/>
+                <TaskList />
               </div>
             </div>
           </div>
@@ -564,15 +365,15 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     status: state.status,
-    updateTasks : state.updateTasks
+    updateTasks: state.updateTasks
   };
 }
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    showTaskForm : () => {
+    showTaskForm: () => {
       dispatch(actions.toggleForm())
     },
-    defaultTasks : () => {
+    defaultTasks: () => {
       dispatch(actions.defaultTasks());
     }
   };

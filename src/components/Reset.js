@@ -7,7 +7,7 @@ class Reset extends Component {
   }
   render() {
     return (
-        <button type="button" className="btn btn-primary" onClick={this.resetFontSize}>reset</button>
+      <button type="button" className="btn btn-primary" onClick={this.resetFontSize}>reset</button>
     );
   }
 }

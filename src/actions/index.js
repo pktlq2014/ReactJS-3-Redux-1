@@ -39,12 +39,6 @@ export const updateTasks = (tasks) => {
         tasks : tasks
     }
 }
-// export const updateTasksNew = (tasks, id) => {
-//     return {
-//         type : types.UPDATE_TASKS_NEWS,
-//         id : id
-//     }
-// }
 export const deleteTasks = (id) => {
     return {
         type : types.DELETE_TASKS,

@@ -4,9 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 // tạo Store và gọi reducers vào
-import {createStore} from 'redux';
+import { createStore } from 'redux';
 import myReducers from './reducers/index';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 const store = createStore(myReducers);
 // muốn kết nối store vs các view (component) phải thông qua thằng provider 
 ReactDOM.render(

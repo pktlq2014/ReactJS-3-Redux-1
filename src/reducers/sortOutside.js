@@ -3,15 +3,15 @@ var initialState = {
     sort: {
         values: '',
         data: 0
-      }
+    }
 };
 var myReducers = (state = initialState, action) => {
     switch (action.type) {
         case types.SORT_OUTSIDE: {
             console.log(action);
             var data = {
-                values : action.values,
-                data : action.data
+                values: action.values,
+                data: action.data
             }
             state = data;
             console.log(state);

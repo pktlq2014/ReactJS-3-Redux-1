@@ -21,14 +21,6 @@ class Search extends Component {
 		this.props.sortAlpha(this.state.txtKey);
 	}
 	render() {
-		// var { tasks, sortAlpha } = this.props;
-		// console.log(tasks);
-		// console.log(sortAlpha);
-		// if (sortAlpha !== '') {
-		// 	tasks = tasks.filter((values, index) => {
-		// 		return values.name.toLowerCase().indexOf(sortAlpha) !== -1;
-		// 	})
-		// }
 		return (
 			<div className="input-group">
 				<input

@@ -142,7 +142,7 @@ const mapStateToProps = state => {
         tasks: state.tasks,
         search: state.search,
         sortAlpha: state.sortAlpha,
-        sortOutside : state.sortOutside
+        sortOutside: state.sortOutside
     }
 }
 const mapDispatchToProps = (dispatch, props) => {

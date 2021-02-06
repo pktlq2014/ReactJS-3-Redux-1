@@ -3,7 +3,7 @@ class ColorPicker extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            colors : [
+            colors: [
                 'red',
                 'blue',
                 'green',
@@ -16,14 +16,14 @@ class ColorPicker extends Component {
     }
     showColors = (values) => {
         return {
-            backgroundColor : values
+            backgroundColor: values
         };
     }
     render() {
         var elementColors = this.state.colors.map((values, index) => {
             return <span key={index} style={this.showColors(values)}
-            className={this.props.color === values ? 'active' : ''}
-            onClick={() => this.changeColors(values, index)}>
+                className={this.props.color === values ? 'active' : ''}
+                onClick={() => this.changeColors(values, index)}>
             </span>
         });
         return (
@@ -34,7 +34,7 @@ class ColorPicker extends Component {
                     </div>
                     <div className="panel-body">
                         {elementColors}
-                        <hr/>
+                        <hr />
                     </div>
                 </div>
             </div>

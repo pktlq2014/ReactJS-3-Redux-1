@@ -4,7 +4,7 @@ class Result extends Component {
         return {
             borderColor: color,
             color: color,
-            fontSize : size
+            fontSize: size
         }
     }
     render() {

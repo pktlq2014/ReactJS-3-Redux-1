@@ -31,27 +31,6 @@ class TaskForm extends Component {
 			});
 		}
 	}
-	// componentWillReceiveProps(nextProps) {
-	// 	var update = JSON.parse(localStorage.getItem("tasksUpdate"));
-	// 	console.log(update);
-	// 	//var update = this.props.tasksUpdate;
-	// 	if (nextProps && nextProps.update) {
-	// 		this.setState({
-	// 			name: update.name,
-	// 			status: update.status,
-	// 			id: update.id
-	// 		});
-	// 		console.log(update.name);
-	// 		console.log(this.state);
-	// 	}
-	// 	else {
-	// 		this.setState({
-	// 			name : '',
-	// 			status : false,
-	// 			id : ''
-	// 		});
-	// 	}
-	// }
 	onSubmit = (event) => {
 		event.preventDefault();
 		console.log("aaa: " + this.state.id);

@@ -1,40 +1,17 @@
 import React, { Component } from "react";
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actions from './../actions/index';
 class TaskItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name : '',
-      status : false,
-      id : ''
+      name: '',
+      status: false,
+      id: ''
     }
   }
   onStatus = () => {
     this.props.onStatus(this.props.id);
-    // var {tasks} = this.props;
-    // tasks.forEach((values, index) => {
-    //   if(values.id === this.props.id) {
-    //     // this.setState({
-    //     //   name : values.name,
-    //     //   status : values.status
-    //     // });
-    //     if(values.status === true) {
-    //       values.status = false;
-    //       this.setState({
-    //         status : values.status
-    //       });
-    //     }
-    //     else {
-    //       values.tatus = true;
-    //       this.setState({
-    //         status : values.status
-    //       });
-    //     }
-    //   }
-    //   console.log(values.status);
-    // });
-    // localStorage.setItem('tasks', JSON.stringify(tasks));
   }
   onDeleteTask = () => {
     //this.props.receiveDataFromTaskItemDelete(this.props.index);
@@ -47,11 +24,11 @@ class TaskItem extends Component {
   onUpdateTask = () => {
     //this.props.receiveDataFromTaskItemUpdate(this.props.id);
     var data = {
-      name : this.props.name,
-      status : this.props.status,
-      id : this.props.id
+      name: this.props.name,
+      status: this.props.status,
+      id: this.props.id
     };
-    if(this.props.status1 === false) {
+    if (this.props.status1 === false) {
       this.props.onUpdate();
       // this.setState({
       //   name : this.props.name,
@@ -72,7 +49,7 @@ class TaskItem extends Component {
     console.log(this.props.status);
     return (
       <tr>
-        <td>{this.props.index+1}</td>
+        <td>{this.props.index + 1}</td>
         <td>{this.props.name}</td>
         <td className="text-center">
           <span onClick={this.onStatus} className={this.props.status === true ? 'label label-success' : 'label label-danger'}>
@@ -94,28 +71,28 @@ class TaskItem extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    status1 : state.status,
-    tasks : state.tasks
+    status1: state.status,
+    tasks: state.tasks
   }
 }
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    onUpdate : () => {
+    onUpdate: () => {
       dispatch(actions.openForm());
     },
-    onCloseForm : () => {
+    onCloseForm: () => {
       dispatch(actions.closeForm());
     },
-    onStatus : (id) => {
+    onStatus: (id) => {
       dispatch(actions.statusForm(id));
     },
-    onUpdateTask : (tasks) => {
+    onUpdateTask: (tasks) => {
       dispatch(actions.updateTasks(tasks));
     },
     // onUpdateTaskNews : (tasks, id) => {
     //   dispatch(actions.updateTasks(tasks, id));
     // },
-    onDeleteTask : (id) => {
+    onDeleteTask: (id) => {
       dispatch(actions.deleteTasks(id));
     }
   }

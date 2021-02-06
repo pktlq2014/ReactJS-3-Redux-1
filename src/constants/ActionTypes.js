@@ -5,7 +5,6 @@ export const CLOSE_FORM = 'CLOSE_FORM';
 export const OPEN_FORM = 'OPEN_FORM';
 export const STATUS_FORM = 'STATUS_FORM';
 export const UPDATE_TASKS = 'UPDATE_TASKS';
-// export const UPDATE_TASKS_NEWS = 'UPDATE_TASKS_NEWS';
 export const DELETE_TASKS = 'DELETE_TASKS';
 export const DEFAULT_TASKS = 'DEFAULT_TASKS';
 export const SEARCH_TASKS = 'SEARCH_TASKS';
