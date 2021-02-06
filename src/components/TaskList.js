@@ -30,7 +30,39 @@ class TaskList extends Component {
     }
     render() {
         // lúc này this.props.tasks là lấy từ store
-        var { tasks, search } = this.props;
+        var { tasks, search, sortAlpha, sortOutside } = this.props;
+        if (sortOutside.values === 'alpha') {
+            tasks.sort((a, b) => {
+                if (a.name > b.name) {
+                    return sortOutside.data;
+                }
+                else if (a.name < b.name) {
+                    return -sortOutside.data;
+                }
+                else {
+                    return 0;
+                }
+            });
+        }
+        else {
+            tasks.sort((a, b) => {
+                if (a.status > b.status) {
+                    return -sortOutside.data;
+                }
+                else if (a.status < b.status) {
+                    return sortOutside.data;
+                }
+                else {
+                    return 0;
+                }
+            });
+        }
+        console.log(sortAlpha);
+        if (sortAlpha !== '') {
+            tasks = tasks.filter((values, index) => {
+                return values.name.toLowerCase().indexOf(sortAlpha) !== -1;
+            });
+        }
         //console.log(tasks);
         //console.log(search);
         // var data = search.name.toLowerCase();
@@ -108,7 +140,9 @@ const mapStateToProps = state => {
         // tasks : -> giống như thằng cha gửi data qua thằng con tasks={this.state.tasks}
         // tasks này là tasks 1
         tasks: state.tasks,
-        search: state.search
+        search: state.search,
+        sortAlpha: state.sortAlpha,
+        sortOutside : state.sortOutside
     }
 }
 const mapDispatchToProps = (dispatch, props) => {

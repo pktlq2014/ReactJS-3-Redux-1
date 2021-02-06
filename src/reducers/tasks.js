@@ -26,13 +26,13 @@ var myReducers = (state = initialState, action) => {
             // }
             // cách 2
             console.log(action);
-            if(action.tasks.id === "") {
+            if (action.tasks.id === "") {
                 action.tasks.id = generateID();
                 state.push(action.tasks);
             }
             else {
                 state.forEach((values, index) => {
-                    if(values.id === action.tasks.id) {
+                    if (values.id === action.tasks.id) {
                         values.name = action.tasks.name;
                         values.status = action.tasks.status;
                     }
@@ -59,42 +59,11 @@ var myReducers = (state = initialState, action) => {
             localStorage.setItem('tasks', JSON.stringify(state));
             return [...state];
         }
-        // case types.UPDATE_TASKS_NEWS: {
-        //     //state = action;
-        //     console.log(action);
-        //     state.forEach((values, index) => {
-        //         if(values.id === action.id) {
-        //             values.id = action.id;
-        //             values.name = action.tasks.name;
-        //             values.status = action.tasks.status;
-        //         }
-        //     });
-        //     return [...state];
-        // }
         case types.DELETE_TASKS: {
             state.splice(action.id, 1);
             localStorage.setItem('tasks', JSON.stringify(state));
             return [...state];
         }
-        // case types.SEARCH_TASKS: {
-        //     console.log(action.tasks);
-        //     var name = action.tasks.name.toLowerCase();
-        //     var status = parseInt(action.tasks.status);
-        //     if (name !== '') {
-        //         state = state.filter((values, index) => {
-        //             return values.name.toLowerCase().indexOf(name) !== -1;
-        //         });
-        //     }
-        //     state = state.filter((values, index) => {
-        //         if(status === -1) {
-        //             return state;
-        //         }
-        //         else {
-        //             return values.status === (status === 0 ? false : true);
-        //         }
-        //     }); 
-        //     //return [...state];
-        // }
         default: return state;
     }
 };

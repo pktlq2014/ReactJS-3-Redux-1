@@ -62,3 +62,16 @@ export const searchTasks = (tasks) => {
         tasks : tasks
     }
 }
+export const sortAlpha = (data) => {
+    return {
+        type : types.SORT_ALPHA,
+        data : data
+    }
+}
+export const sortOutside = (values, data) => {
+    return {
+        type : types.SORT_OUTSIDE,
+        values : values,
+        data : data
+    }
+}

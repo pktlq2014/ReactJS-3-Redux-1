@@ -66,20 +66,20 @@ class App extends Component {
       }
     };
   }
-  receiveDataFromSort = (values, data) => {
-    console.log(values, data);
-    this.setState({
-      sort: {
-        values: values,
-        data: data
-      }
-    });
-  }
-  receiveDataFromSearch = (values) => {
-    this.setState({
-      txtKey: values.toLowerCase()
-    });
-  }
+  // receiveDataFromSort = (values, data) => {
+  //   console.log(values, data);
+  //   this.setState({
+  //     sort: {
+  //       values: values,
+  //       data: data
+  //     }
+  //   });
+  // }
+  // receiveDataFromSearch = (values) => {
+  //   this.setState({
+  //     txtKey: values.toLowerCase()
+  //   });
+  // }
   // receiveDataFromTaskItemSeachActive = (name, active) => {
   //   console.log(name, active);
   //   var active1 = parseInt(active);
@@ -303,32 +303,6 @@ class App extends Component {
     //   receiveDataFromTaskForm={this.receiveDataFromTaskForm} />
     var { search, txtKey, sort } = this.state;
     console.log(search);
-    // if(sort.values === 'alpha') {
-    //   tasks.sort((a, b) => {
-    //     if(a.name > b.name) {
-    //       return sort.data;
-    //     }
-    //     else if(a.name < b.name) {
-    //       return -sort.data;
-    //     }
-    //     else {
-    //       return 0;
-    //     }
-    //   });
-    // }
-    // else {
-    //   tasks.sort((a, b) => {
-    //     if(a.status > b.status) {
-    //       return -sort.data;
-    //     }
-    //     else if(a.status < b.status) {
-    //       return sort.data;
-    //     }
-    //     else {
-    //       return 0;
-    //     }
-    //   });
-    // }
     console.log(sort);
     // if (txtKey !== '') {
     //   tasks = tasks.filter((values, index) => {
@@ -397,17 +371,12 @@ class App extends Component {
 
 
 
-              <Control
-                receiveDataFromSort={this.receiveDataFromSort}
-                receiveDataFromSearch={this.receiveDataFromSearch}
-              />
+              <Control/>
 
 
 
               <div className="row mt-15">
-                <TaskList
-               
-                 />
+                <TaskList/>
               </div>
             </div>
           </div>

@@ -9,3 +9,5 @@ export const UPDATE_TASKS = 'UPDATE_TASKS';
 export const DELETE_TASKS = 'DELETE_TASKS';
 export const DEFAULT_TASKS = 'DEFAULT_TASKS';
 export const SEARCH_TASKS = 'SEARCH_TASKS';
+export const SORT_ALPHA = 'SORT_ALPHA';
+export const SORT_OUTSIDE = 'SORT_OUTSIDE';
