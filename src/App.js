@@ -5,12 +5,60 @@ import ProductTable from './components/ProductTable';
 import ColorPicker from './components/ColorPicker';
 import Reset from './components/Reset';
 import Result from './components/Result';
+import Home from './components/Home';
+import NotFound from './components/NotFound';
+import About from './components/About';
 import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
 import Control from './components/Control';
 import SizeSetting from './components/SizeSetting';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import * as actions from './actions/index';
+const routes = [
+  {
+    path: '/',
+    exact: true,
+    main: () => <Home />
+  },
+  {
+    path: '/about',
+    exact: false,
+    main: () => <About />
+  },
+  {
+    path: '',
+    exact: false,
+    main: () => <NotFound />
+  }
+];
+const menus = [
+  {
+    name: 'Trang chủ',
+    to: '/',
+    exact: true
+  },
+  {
+    name: 'Giới thiệu',
+    to: '/about',
+    exact: false
+  }
+];
+const MenuLink = ({ label, to, actionOnlyWhenExact }) => {
+  return (
+    <Route path={to} exact={actionOnlyWhenExact} children={({ match }) => {
+      var active = match ? 'navbar_active abc' : '';
+      return (
+        // để class ở thẻ li or Link cũng được
+        <li >
+          <Link to={to} className={`qwe ${active}`}>
+            {label}
+          </Link>
+        </li>
+      )
+    }} />
+  )
+}
 class App extends Component {
   constructor(props) {
     super(props);
@@ -65,6 +113,35 @@ class App extends Component {
         data: 0
       }
     };
+  }
+  showRoute = (routes) => {
+    var result = null;
+    if (routes.length > 0) {
+      result = routes.map((values, index) => {
+        return <Route
+          path={values.path}
+          exact={values.exact}
+          component={values.main}
+        />
+      });
+    }
+    return result;
+  }
+  showLink = (menus) => {
+    var result = null;
+    if (menus.length > 0) {
+      result = menus.map((values, index) => {
+        return (
+          <MenuLink
+            key={index}
+            label={values.name}
+            to={values.to}
+            actionOnlyWhenExact={values.exact}
+          />
+        )
+      });
+    }
+    return result;
   }
   showTaskForm = () => {
     this.props.showTaskForm();
@@ -150,6 +227,21 @@ class App extends Component {
     });
     return (
       <div>
+        <Router>
+          {/* menu */}
+          <nav className="navbar navbar-inverse">
+            <ul className="nav navbar-nav">
+              {this.showLink(menus)}
+            </ul>
+          </nav>
+          {/* nội dung */}
+          <Switch>
+            {this.showRoute(routes)}
+          </Switch>
+        </Router>
+
+
+
         <div className="container">
           <div className="text-center">
             <h1>Quản Lý Công Việc</h1>

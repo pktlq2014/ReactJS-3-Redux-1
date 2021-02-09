@@ -75,3 +75,7 @@ span {
   margin: 0px 0px 0px 10px;
   display: inline-block;
 }
+.navbar_active {
+  background-color: white !important;
+  color: black !important;
+}
