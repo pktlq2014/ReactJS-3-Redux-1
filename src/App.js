@@ -6,6 +6,8 @@ import ColorPicker from './components/ColorPicker';
 import Reset from './components/Reset';
 import Result from './components/Result';
 import Home from './components/Home';
+import Productss from './components/Productss';
+import Login from './components/Login';
 import NotFound from './components/NotFound';
 import About from './components/About';
 import TaskForm from './components/TaskForm';
@@ -24,7 +26,17 @@ const routes = [
   {
     path: '/about',
     exact: false,
-    main: () => <About />
+    main: () => <About/>
+  },
+  {
+    path: '/products',
+    exact: false,
+    main: ({match}) => <Productss match={match}/>
+  },
+  {
+    path: '/login',
+    exact: false,
+    main: () => <Login/>
   },
   {
     path: '',
@@ -41,6 +53,16 @@ const menus = [
   {
     name: 'Giới thiệu',
     to: '/about',
+    exact: false
+  },
+  {
+    name: 'Sản phẩm',
+    to: '/products',
+    exact: false
+  },
+  {
+    name: 'Đăng nhập',
+    to: '/login',
     exact: false
   }
 ];
